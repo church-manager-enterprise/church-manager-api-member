@@ -1,0 +1,8 @@
+CREATE TABLE roles (
+    id BIGSERIAL PRIMARY KEY,
+    uuid UUID NOT NULL,
+    removed_at TIMESTAMP,
+    updated_at TIMESTAMP,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    name VARCHAR(255) NOT NULL
+);

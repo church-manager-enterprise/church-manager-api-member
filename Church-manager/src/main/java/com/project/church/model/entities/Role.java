@@ -4,13 +4,13 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "roles")
+@Table(name = "roles", schema = "public")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Getter
 public class Role extends Base {
 
-    @Column(name = "name", nullable = false)
+    @Column(nullable = false)
     private String name;
 }

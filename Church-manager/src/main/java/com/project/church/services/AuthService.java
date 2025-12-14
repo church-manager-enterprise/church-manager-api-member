@@ -1,6 +1,10 @@
 package com.project.church.services;
 
 
+import com.project.church.exception.EntityAlreadyExistsException;
+import com.project.church.exception.EntityNotFoundException;
+import com.project.church.exception.InvalidCredentialsException;
+import com.project.church.message.LogMessageEnum;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,6 +25,7 @@ import com.project.church.utils.JwtUtil;
 @Service
 public class AuthService {
 
+    public static final String USER = "USER";
     private final MemberRepository memberRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
@@ -42,22 +47,22 @@ public class AuthService {
             String token = jwtUtil.generateToken(login.getUsername());
             return ResponseEntity.ok(new JwtResponse(token));
         } catch (AuthenticationException ex) {
-            return ResponseEntity.status(401).body("Credenciais inválidas");
+            throw new InvalidCredentialsException(LogMessageEnum.INVALID_CREDENTIALS.getMessage());
         }
     }
 
     public Member register(RegisterRequest request) {
 
         if (memberRepository.findByEmail(request.getEmail()).isPresent()) {
-            throw new RuntimeException("Email já está em uso");
+            throw new EntityAlreadyExistsException(String.format(LogMessageEnum.EMAIL_ALREADY_IN_USE.getMessage(), request.getEmail()));
         }
 
         if (memberRepository.findByUsername(request.getUsername()).isPresent()) {
-            throw new RuntimeException("Username já está em uso");
+            throw new EntityAlreadyExistsException(String.format(LogMessageEnum.USERNAME_ALREADY_IN_USE.getMessage(), request.getUsername()));
         }
 
-        Role role = roleRepository.findByName("USER")
-                .orElseThrow(() -> new RuntimeException("Role não encontrada"));
+        Role role = roleRepository.findByName(USER)
+                .orElseThrow(() -> new EntityNotFoundException(String.format(LogMessageEnum.ROLE_NOT_FOUND.getMessage(), USER)));
 
         Member member = MemberBuilder.build(request.getName(), request.getEmail(), request.getUsername(), passwordEncoder.encode(request.getPassword()), role);
 

@@ -1,9 +1,10 @@
 package com.project.church.builder;
 
-
 import com.project.church.model.dto.MemberDTO;
 import com.project.church.model.entities.Member;
 import com.project.church.model.entities.Role;
+
+import java.util.UUID;
 
 public final class MemberBuilder {
 
@@ -18,7 +19,7 @@ public final class MemberBuilder {
                 .build();
     }
 
-    public static Member fromCreateRequest(
+    public static Member buildForRegister(
             String name,
             String email,
             String username,
@@ -26,6 +27,7 @@ public final class MemberBuilder {
             Role role
     ) {
         return Member.builder()
+                .uuid(UUID.randomUUID())
                 .name(name)
                 .email(email)
                 .username(username)
@@ -34,4 +36,5 @@ public final class MemberBuilder {
                 .build();
     }
 }
+
 

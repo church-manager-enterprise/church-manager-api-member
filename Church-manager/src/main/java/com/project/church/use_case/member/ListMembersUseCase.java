@@ -1,4 +1,4 @@
-package com.project.church.services;
+package com.project.church.use_case.member;
 
 import com.project.church.builder.MemberBuilder;
 import com.project.church.model.dto.MemberDTO;
@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ListMembersService {
+public class ListMembersUseCase {
 
     private final MemberRepository repo;
 

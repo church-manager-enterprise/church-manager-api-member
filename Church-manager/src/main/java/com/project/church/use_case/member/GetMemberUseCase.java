@@ -1,4 +1,4 @@
-package com.project.church.services;
+package com.project.church.use_case.member;
 
 import com.project.church.builder.MemberBuilder;
 import com.project.church.exception.EntityNotFoundException;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class GetMemberService {
+public class GetMemberUseCase {
 
     private final MemberRepository repo;
 

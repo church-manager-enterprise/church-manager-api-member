@@ -1,9 +1,9 @@
 package com.project.church.controller;
 
 import com.project.church.model.dto.MemberDTO;
-import com.project.church.services.DeleteMemberService;
-import com.project.church.services.GetMemberService;
-import com.project.church.services.ListMembersService;
+import com.project.church.use_case.member.DeleteMemberUseCase;
+import com.project.church.use_case.member.GetMemberUseCase;
+import com.project.church.use_case.member.ListMembersUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,9 +14,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberController {
 
-    private final ListMembersService list;
-    private final GetMemberService get;
-    private final DeleteMemberService delete;
+    private final ListMembersUseCase list;
+    private final GetMemberUseCase get;
+    private final DeleteMemberUseCase delete;
 
     @GetMapping
     public List<MemberDTO> list() {

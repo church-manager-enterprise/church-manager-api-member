@@ -1,0 +1,47 @@
+version: '3.9'
+
+services:
+  # Banco de dados PostgreSQL
+  postgres:
+    image: postgres:15
+    container_name: members-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: members_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db:/docker-entrypoint-initdb.d
+    networks:
+      - church-manager-network
+
+  # Aplicação Spring Boot
+  app:
+    build:
+      context: .
+    container_name: members-spring-app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/members_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 1234 
+      
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "true"
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
+      
+      JWT_SECRET: 019a6063-7fda-787e-a835-8bb90d689428019a6063-ac55-7379-97b1-c2b4996abe92
+      JWT_EXPIRATION_MS: 3600
+    depends_on:
+      - postgres
+    networks:
+      - church-manager-network
+
+networks:
+  church-manager-network:
+    external: true
+
+volumes:
+  postgres_data:
+    driver: local

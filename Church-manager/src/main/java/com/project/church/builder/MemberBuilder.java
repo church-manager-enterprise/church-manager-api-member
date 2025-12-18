@@ -24,6 +24,7 @@ public final class MemberBuilder {
             String email,
             String username,
             String encodedPassword,
+            String churchId,
             Role role
     ) {
         return Member.builder()
@@ -32,6 +33,7 @@ public final class MemberBuilder {
                 .email(email)
                 .username(username)
                 .password(encodedPassword)
+                .churchId(churchId)
                 .role(role)
                 .build();
     }

@@ -7,5 +7,6 @@ public class RegisterRequest {
     private String name;
     private String email;
     private String username;
+    private String churchId;
     private String password;
 }

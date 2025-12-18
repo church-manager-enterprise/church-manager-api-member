@@ -39,6 +39,7 @@ public class RegisterMemberUseCase {
                 request.getName(),
                 request.getEmail(),
                 request.getUsername(),
+                request.getChurchId(),
                 passwordEncoder.encode(request.getPassword()),
                 role
         );

@@ -17,6 +17,8 @@ public interface MemberJpaRepository extends JpaRepository<Member, Long> {
     Optional<Member> findByUsernameAndRemovedAtIsNull(String username);
 
     List<Member> findAllByRemovedAtIsNull();
+
+    List<Member> findByChurchIdAndRemovedAtIsNull(String churchId);
 }
 
 

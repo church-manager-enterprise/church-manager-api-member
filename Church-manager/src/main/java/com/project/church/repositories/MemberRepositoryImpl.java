@@ -60,4 +60,9 @@ public class MemberRepositoryImpl implements MemberRepository {
                 }
         );
     }
+
+    @Override
+    public List<Member> findByChurchId(String churchId) {
+        return repo.findByChurchIdAndRemovedAtIsNull(churchId);
+    }
 }

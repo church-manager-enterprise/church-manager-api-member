@@ -18,7 +18,7 @@ public class MemberDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Member m = memberRepository.findByUsername(username)
+        Member m = memberRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
         return new MemberDetails(m);
     }

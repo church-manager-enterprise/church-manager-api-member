@@ -37,7 +37,7 @@ public class LoginUseCase {
             String token = tokenService.generateToken(request.getEmail());
 
             MemberUserResponse userResponse = new MemberUserResponse(
-                    member.getUuid().toString(),
+                    member.getId().toString(),
                     member.getEmail(),
                     member.getName(),
                     member.getRole().getName(),

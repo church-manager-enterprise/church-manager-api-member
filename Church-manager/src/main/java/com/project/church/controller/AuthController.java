@@ -4,7 +4,6 @@ import com.project.church.model.response.JwtResponse;
 import com.project.church.use_case.auth.LoginUseCase;
 import com.project.church.use_case.auth.RegisterMemberUseCase;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

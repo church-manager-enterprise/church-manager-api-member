@@ -7,14 +7,12 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-
 
 @Table(name = "members")
 @Entity
@@ -36,6 +34,9 @@ public class Member extends Base {
 
     @Column(nullable = false, length = 255)
     private String password;
+
+    @Column(nullable = true, length = 255)
+    private String churchId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id", referencedColumnName = "id")
